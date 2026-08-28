@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Global Rush Arena — Futsal Ground, Kanju</title>
+<meta name="description" content="Global Rush Arena is a floodlit futsal ground in Kanju Town, Swat — open 24/7. Book your slot directly on WhatsApp, no forms required.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://YOUR-GITHUB-USERNAME.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Global Rush Arena — Futsal Ground, Kanju">
+<meta property="og:description" content="Floodlit futsal ground in Kanju Town, Swat — open 24/7. Book your slot on WhatsApp.">
+<meta property="og:url" content="https://YOUR-GITHUB-USERNAME.github.io/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Global Rush Arena — Futsal Ground, Kanju">
+<meta name="twitter:description" content="Floodlit futsal ground in Kanju Town, Swat — open 24/7. Book your slot on WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Kalam:wght@400;700&family=Work+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --board: #1c3a2c;
+    --board-deep: #12281e;
+    --chalk: #f4f1e6;
+    --chalk-dim: #c9d6c8;
+    --marker-yellow: #ffcc3d;
+    --marker-orange: #ff7a4a;
+    --paper: #f2ead2;
+    --paper-line: #d8cba3;
+    --ink: #16281f;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--board);
+    color:var(--chalk);
+    font-family:'Work Sans', sans-serif;
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  /* chalkboard grain texture */
+  .grain{ position:fixed; inset:0; z-index:5; pointer-events:none; opacity:0.05; filter:url(#chalkNoise); background:#fff; mix-blend-mode:overlay; }
+
+  /* soft chalk smudge glows */
+  .smudge{ position:fixed; z-index:0; pointer-events:none; border-radius:50%; filter:blur(60px); }
+  .smudge-a{ width:520px; height:520px; top:-160px; left:-180px; background:radial-gradient(circle, rgba(255,204,61,0.12), transparent 70%); animation:sway 14s ease-in-out infinite; }
+  .smudge-b{ width:600px; height:600px; bottom:-220px; right:-200px; background:radial-gradient(circle, rgba(255,122,74,0.10), transparent 70%); animation:sway 18s ease-in-out infinite reverse; }
+  @keyframes sway{ 0%,100%{transform:translate(0,0);} 50%{transform:translate(30px,-20px);} }
+
+  /* floating chalk dust */
+  .dust{ position:fixed; z-index:1; pointer-events:none; border-radius:50%; background:var(--chalk); opacity:0; }
+  .dust{ animation:rise linear infinite; }
+  @keyframes rise{
+    0%{ opacity:0; transform:translateY(0) translateX(0); }
+    10%{ opacity:0.5; }
+    90%{ opacity:0.3; }
+    100%{ opacity:0; transform:translateY(-90vh) translateX(20px); }
+  }
+
+  a{color:inherit;}
+
+  /* ===== HERO ===== */
+  header.hero{
+    position:relative; z-index:2;
+    min-height:94vh;
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    text-align:center;
+    padding:110px 24px 70px;
+  }
+
+  .note{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'Kalam', cursive; font-weight:700;
+    font-size:15px; color:var(--marker-yellow);
+    transform:rotate(-2deg);
+    opacity:0; animation: drop-in 0.6s ease forwards 0.1s;
+    margin-bottom:28px;
+  }
+  .note .dot{ width:8px; height:8px; border-radius:50%; background:#7ee08a; box-shadow:0 0 0 0 rgba(126,224,138,0.6); animation:ping 1.6s infinite; }
+  @keyframes ping{ 0%,100%{box-shadow:0 0 0 0 rgba(126,224,138,0.55);} 70%{box-shadow:0 0 0 8px rgba(126,224,138,0);} }
+
+  h1.brand{
+    font-family:'Permanent Marker', cursive;
+    font-weight:400;
+    font-size:clamp(46px, 9.5vw, 108px);
+    line-height:1.05;
+    color:var(--chalk);
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.25);
+    opacity:0; animation: drop-in 0.7s ease forwards 0.25s;
+  }
+  h1.brand .hl{
+    position:relative; display:inline-block; color:var(--ink);
+    padding:0 6px;
+  }
+  h1.brand .hl::before{
+    content:""; position:absolute; z-index:-1; left:-4px; right:-4px; top:12%; bottom:8%;
+    background:var(--marker-yellow);
+    transform:rotate(-1deg) scaleX(0); transform-origin:left center;
+    animation: swipe 0.6s ease forwards 0.9s;
+    border-radius:3px 10px 4px 12px;
+  }
+  @keyframes swipe{ to{ transform:rotate(-1deg) scaleX(1); } }
+
+  .tagline{
+    margin-top:26px; font-family:'Kalam', cursive; font-weight:400;
+    font-size:clamp(16px, 2.1vw, 21px);
+    color:var(--chalk-dim); max-width:460px; line-height:1.55;
+    opacity:0; animation: drop-in 0.7s ease forwards 0.45s;
+  }
+  .tagline b{ color:var(--chalk); font-weight:700; }
+
+  @keyframes drop-in{
+    from{ opacity:0; transform:translateY(-14px) rotate(-1deg); }
+    to{ opacity:1; transform:translateY(0) rotate(0deg); }
+  }
+
+  .cta-row{
+    margin-top:42px; display:flex; flex-wrap:wrap; gap:16px; justify-content:center;
+    opacity:0; animation: drop-in 0.7s ease forwards 0.65s;
+  }
+
+  .scribble-wrap{ position:relative; display:inline-block; }
+  .scribble-wrap svg.scribble{
+    position:absolute; top:-14px; left:-16px; right:-16px; bottom:-14px;
+    width:calc(100% + 32px); height:calc(100% + 28px);
+    pointer-events:none; overflow:visible;
+  }
+  .scribble-wrap svg.scribble path{
+    fill:none; stroke:var(--marker-orange); stroke-width:3;
+    stroke-linecap:round; stroke-dasharray:340; stroke-dashoffset:340;
+    animation: draw 1s ease forwards 1.1s;
+  }
+  @keyframes draw{ to{ stroke-dashoffset:0; } }
+
+  .btn{
+    position:relative; font-family:'Work Sans', sans-serif; font-weight:700; font-size:16px;
+    padding:16px 32px; text-decoration:none; display:inline-flex; align-items:center; gap:10px;
+    border:2.5px solid var(--ink); cursor:pointer;
+    transition: transform 0.18s ease;
+  }
+  .btn:focus-visible{ outline:2px solid var(--marker-yellow); outline-offset:3px; }
+  .btn-primary{
+    background:var(--marker-yellow); color:var(--ink);
+    border-radius:255px 18px 225px 18px / 18px 225px 18px 255px;
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+  .btn-primary:hover{ transform:translate(-2px,-2px) rotate(-1deg); box-shadow:6px 6px 0 var(--ink); }
+  .btn-primary:active{ transform:translate(1px,1px); box-shadow:2px 2px 0 var(--ink); }
+  .btn-ghost{
+    background:transparent; color:var(--chalk); border-color:var(--chalk-dim);
+    border-radius:225px 18px 255px 18px / 18px 255px 18px 225px;
+  }
+  .btn-ghost:hover{ transform:translate(-2px,-2px) rotate(1deg); border-color:var(--marker-yellow); color:var(--marker-yellow); }
+
+  /* decorative tactics diagram, desktop only */
+  .diagram{
+    position:absolute; top:60px; right:40px; width:260px; height:260px;
+    opacity:0.9;
+  }
+  .diagram .run-line{ stroke-dasharray:2 14; animation: march 1.1s linear infinite; }
+  @keyframes march{ to{ stroke-dashoffset:-16; } }
+  .diagram .ball{
+    position:absolute; top:0; left:0; width:20px; height:20px;
+    offset-path: path("M20,230 C40,150 90,150 110,110 C130,70 180,70 230,30");
+    offset-distance:0%;
+    animation: run-ball 3.6s ease-in-out infinite alternate;
+  }
+  .diagram .ball svg{ width:100%; height:100%; animation: spin 0.55s linear infinite; display:block; }
+  @keyframes run-ball{ from{ offset-distance:0%; } to{ offset-distance:96%; } }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  @media (max-width:980px){ .diagram{ display:none; } }
+
+  /* ===== TAPED INFO STRIP ===== */
+  section.strip{ position:relative; z-index:2; padding:40px 24px 90px; display:flex; flex-wrap:wrap; justify-content:center; gap:26px; max-width:1000px; margin:0 auto; }
+  .card{
+    background:var(--paper); color:var(--ink);
+    padding:26px 24px 22px; width:220px; text-align:center;
+    box-shadow:0 10px 22px rgba(0,0,0,0.28);
+    position:relative;
+  }
+  .card:nth-child(1){ transform:rotate(-3deg); }
+  .card:nth-child(2){ transform:rotate(2deg); }
+  .card:nth-child(3){ transform:rotate(-1.5deg); }
+  .card:hover{ transform:rotate(0deg) translateY(-4px); transition:transform 0.25s ease; }
+  .tape{
+    position:absolute; top:-14px; left:50%; transform:translateX(-50%) rotate(-3deg);
+    width:70px; height:24px; background:rgba(244,241,230,0.55);
+    border:1px solid rgba(0,0,0,0.06);
+  }
+  .card-label{ font-family:'Kalam', cursive; font-weight:700; font-size:12px; letter-spacing:0.06em; text-transform:uppercase; color:var(--marker-orange); margin-bottom:10px; }
+  .card-value{ font-family:'Permanent Marker', cursive; font-size:26px; line-height:1.2; }
+  .card-sub{ margin-top:8px; font-family:'Kalam', cursive; font-size:13px; color:#4a5a4d; }
+
+  /* ===== SECTIONS ===== */
+  .reveal{ opacity:0; transform:translateY(26px) rotate(-1.5deg); transition:opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible{ opacity:1; transform:translateY(0) rotate(0deg); }
+
+  section.features{ position:relative; z-index:2; max-width:1020px; margin:0 auto; padding:40px 24px 100px; }
+  .section-eyebrow{ font-family:'Kalam', cursive; font-weight:700; font-size:15px; color:var(--marker-yellow); margin-bottom:10px; transform:rotate(-1deg); display:inline-block; }
+  .section-title{ font-family:'Permanent Marker', cursive; font-size:clamp(28px,4vw,44px); margin-bottom:44px; max-width:640px; line-height:1.18; color:var(--chalk); }
+
+  .feature-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:34px; }
+  .feature{ background:var(--paper); color:var(--ink); padding:30px 24px 26px; position:relative; box-shadow:0 12px 24px rgba(0,0,0,0.3); }
+  .feature:nth-child(1){ transform:rotate(1.5deg); }
+  .feature:nth-child(2){ transform:rotate(-2deg); }
+  .feature:nth-child(3){ transform:rotate(1deg); }
+  .feature:hover{ transform:rotate(0deg) translateY(-6px) scale(1.02); transition:transform 0.25s ease; }
+  .feature .tape{ left:20px; transform:rotate(-4deg); }
+  .feature-icon{ width:34px; height:34px; color:var(--marker-orange); margin-bottom:16px; }
+  .feature h3{ font-family:'Work Sans',sans-serif; font-weight:700; font-size:18px; margin-bottom:8px; }
+  .feature p{ font-size:14.5px; line-height:1.6; color:#42513f; }
+
+  /* ===== FOOTER TICKET ===== */
+  footer{ position:relative; z-index:2; padding:20px 24px 70px; display:flex; justify-content:center; }
+  .ticket{
+    background:var(--paper); color:var(--ink); max-width:560px; width:100%;
+    padding:44px 36px 34px; text-align:center; position:relative;
+    box-shadow:0 16px 30px rgba(0,0,0,0.32);
+    background-image: repeating-linear-gradient(to right, transparent 0 10px, rgba(0,0,0,0.08) 10px 11px);
+    background-repeat:no-repeat; background-position:bottom 78px left; background-size:100% 2px;
+  }
+  .ticket::before, .ticket::after{
+    content:""; position:absolute; width:22px; height:22px; background:var(--board); border-radius:50%;
+    bottom:67px;
+  }
+  .ticket::before{ left:-11px; }
+  .ticket::after{ right:-11px; }
+  .ticket .section-title{ color:var(--ink); margin-bottom:14px; }
+  .ticket p.sub{ font-family:'Kalam', cursive; font-size:16px; max-width:400px; margin:0 auto 30px; color:#41503f; line-height:1.5; }
+  .contact-row{ display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-bottom:32px; }
+  .stub{ font-family:'JetBrains Mono', monospace; font-size:13px; color:#4a5a4d; line-height:1.9; padding-top:22px; }
+  .stub b{ color:var(--ink); font-weight:600; }
+  .foot-line{ margin-top:24px; font-family:'Kalam', cursive; font-size:13px; color:#6b7a68; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
+    .note, h1.brand, .tagline, .cta-row{ opacity:1; }
+    .reveal{ opacity:1; transform:none; }
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <filter id="chalkNoise">
+    <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch" result="noise"/>
+    <feColorMatrix in="noise" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.06 0"/>
+  </filter>
+</svg>
+
+<div class="grain"></div>
+<div class="smudge smudge-a"></div>
+<div class="smudge smudge-b"></div>
+
+<div class="dust" style="width:4px;height:4px;left:8%;animation-duration:11s;animation-delay:0s;"></div>
+<div class="dust" style="width:3px;height:3px;left:22%;animation-duration:14s;animation-delay:2s;"></div>
+<div class="dust" style="width:5px;height:5px;left:38%;animation-duration:10s;animation-delay:4s;"></div>
+<div class="dust" style="width:3px;height:3px;left:55%;animation-duration:13s;animation-delay:1s;"></div>
+<div class="dust" style="width:4px;height:4px;left:68%;animation-duration:12s;animation-delay:5s;"></div>
+<div class="dust" style="width:3px;height:3px;left:80%;animation-duration:15s;animation-delay:3s;"></div>
+<div class="dust" style="width:4px;height:4px;left:92%;animation-duration:11s;animation-delay:6s;"></div>
+
+<header class="hero">
+  <div class="diagram">
+    <svg viewBox="0 0 260 260" width="260" height="260">
+      <path d="M20,230 C40,150 90,150 110,110 C130,70 180,70 230,30" fill="none" stroke="#c9d6c8" stroke-width="3" stroke-linecap="round" class="run-line"/>
+      <circle cx="20" cy="230" r="6" fill="#f4f1e6"/>
+      <path d="M216,18 L230,30 L215,42" fill="none" stroke="#c9d6c8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div class="ball">
+      <svg viewBox="0 0 100 100" fill="none">
+        <circle cx="50" cy="50" r="47" fill="#f4f1e6" stroke="#16281f" stroke-width="3"/>
+        <path d="M50 20 L67 32 L61 52 L39 52 L33 32 Z" fill="#16281f"/>
+        <path d="M50 20 L33 32 M50 20 L67 32 M39 52 L20 46 M39 52 L28 70 M61 52 L80 46 M61 52 L72 70" stroke="#16281f" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="note"><span class="dot"></span> open 24 hours — kanju, swat</div>
+
+  <h1 class="brand">Global Rush<br><span class="hl">Arena</span></h1>
+
+  <p class="tagline">A floodlit futsal ground in Kanju Town. <b>Grab your slot</b> straight over WhatsApp — no forms, no waiting around.</p>
+
+  <div class="cta-row">
+    <span class="scribble-wrap">
+      <svg class="scribble" viewBox="0 0 300 110" preserveAspectRatio="none">
+        <path d="M18,55 C10,25 60,8 150,10 C245,12 292,25 282,55 C274,88 220,102 150,101 C75,100 26,88 18,55 Z"/>
+      </svg>
+      <a class="btn btn-primary" href="https://wa.me/923339483257?text=Hi%2C%20I%27d%20like%20to%20book%20a%20slot%20at%20Global%20Rush%20Arena" target="_blank" rel="noopener">Book Now on WhatsApp</a>
+    </span>
+    <a class="btn btn-ghost" href="tel:03339483257">Call 0333 9483257</a>
+  </div>
+</header>
+
+<section class="strip">
+  <div class="card">
+    <div class="tape"></div>
+    <div class="card-label">Hours</div>
+    <div class="card-value">24 / 7</div>
+    <div class="card-sub">book any time, day or night</div>
+  </div>
+  <div class="card">
+    <div class="tape"></div>
+    <div class="card-label">Ground</div>
+    <div class="card-value">Futsal Turf</div>
+    <div class="card-sub">managed play surface</div>
+  </div>
+  <div class="card">
+    <div class="tape"></div>
+    <div class="card-label">Location</div>
+    <div class="card-value">Kanju Town</div>
+    <div class="card-sub">R83V+9VR, Swat</div>
+  </div>
+</section>
+
+<section class="features">
+  <div class="section-eyebrow reveal">why play here</div>
+  <h2 class="section-title reveal">Everything sorted before kickoff.</h2>
+  <div class="feature-grid">
+    <div class="feature reveal">
+      <div class="tape"></div>
+      <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+      <h3>Book in one message</h3>
+      <p>Tap "Book Now," tell us your date and time on WhatsApp, and we'll confirm your slot directly.</p>
+    </div>
+    <div class="feature reveal">
+      <div class="tape"></div>
+      <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+      <h3>Open around the clock</h3>
+      <p>Early practice or a late-night match with friends — the ground never really closes.</p>
+    </div>
+    <div class="feature reveal">
+      <div class="tape"></div>
+      <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.4"/></svg>
+      <h3>Easy to find</h3>
+      <p>Kanju Town, right off Airport Road, near United Bank Limited.</p>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="ticket reveal">
+    <div class="section-eyebrow">get in touch</div>
+    <h2 class="section-title">Ready for your slot?</h2>
+    <p class="sub">Send your preferred day and time on WhatsApp and we'll lock it in for you.</p>
+    <div class="contact-row">
+      <span class="scribble-wrap">
+        <a class="btn btn-primary" href="https://wa.me/923339483257?text=Hi%2C%20I%27d%20like%20to%20book%20a%20slot%20at%20Global%20Rush%20Arena" target="_blank" rel="noopener" style="border-radius:225px 18px 255px 18px / 18px 255px 18px 225px;">Book Now on WhatsApp</a>
+      </span>
+      <a class="btn btn-ghost" href="https://www.google.com/maps/search/?api=1&query=Global+Rush+Arena+Kanju+Swat" target="_blank" rel="noopener" style="border-color:#41503f; color:#41503f;">Get Directions</a>
+    </div>
+    <div class="stub">
+      <b>GLOBAL RUSH ARENA</b><br>
+      R83V+9VR, Swat, Kanju Town, Kanju<br>
+      0333 9483257
+    </div>
+    <div class="foot-line">© 2026 Global Rush Arena — see you on the pitch</div>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
